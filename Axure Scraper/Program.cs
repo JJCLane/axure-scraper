@@ -90,8 +90,6 @@ namespace Axure_Scraper
 
         async static Task Main(string[] args)
         {
-            await Instagram();
-            return;
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
 
             var modules = new List<Module>();
@@ -141,7 +139,7 @@ namespace Axure_Scraper
             var separator = pageName.IndexOf('|');
             nodes.Add(new Module() {
                 Id = node.id,
-                ModuleId = pageName.Substring(0, separator),
+                ModuleId = separator != -1 ? pageName.Substring(0, separator) : "",
                 Name = node.pageName,
                 Url = $"https://sqf8iu.axshare.com/#id={node.id}&p={node.url}&g=1"
             });
